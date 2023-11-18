@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home -SHOPIFY </title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<main>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="dkw.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Contact</a></li>
+            </ul>
+            <div class="cart">
+                <a href="cart.html"><img src="c:\Users\Gurukiran Y\.vscode\.vscode\shopping-cart_60992.png" alt="Shopping Cart"></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="hero">
+            <h1>WELCOME TO-SHOPIFY</h1>
+            <p>We provide top-notch services.</p>  
+            <a href="services.html" class="button">Explore Services</a>
+            <div class="login-form">
+                <h2>Login</h2>
+                <form action="login.php" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+
+
+
+
+
+            
+            <section>
+                <p>login using your cridential</p>
+                <p>
+                    If you not register yet,you must register before you login
+                </p>
+            </section>
+
+
+
+
+
+
+
+            <section>
+                <label for="register">register:</label>
+                <button type="register"> register</button>
+            </section>
+
+
+
+
+
+
+        </section>
+        <section id="description">
+            <h2>About Us</h2>
+            <p>At -SHOPIFY, we take pride in our commitment to providing exceptional quality and unmatched value. Our mission is to provide good product and servives to you.</p>
+            <p>We believe in building lasting relationships with our customers and delivering the best product to customers.</p>
+        </section>
+             
+    </main>
+
+
+
+    
+   
+</body>
+<footer>
+    <p>&copy; 2023 -SHOPIFY</p>
+</footer>
+
+</html>
+<!-- Add this to the existing HTML, after the closing </html> tag is preferable -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+        const cartItemsList = document.getElementById("cart-items");
+        const cartTotal = document.getElementById("cart-total");
+
+        let cart = [];
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const product = button.parentElement;
+                const productId = product.dataset.id;
+                const productName = product.dataset.name;
+                const productPrice = parseFloat(product.dataset.price);
+
+                addToCart(productId, productName, productPrice);
+                updateCartDisplay();
+            });
+        });
+
+        function addToCart(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+        }
+
+        function updateCartDisplay() {
+            cartItemsList.innerHTML = "";
+            let total = 0;
+
+            cart.forEach(item => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`;
+                cartItemsList.appendChild(listItem);
+                total += item.price * item.quantity;
+            });
+
+            cartTotal.textContent = total.toFixed(2);
+        }
+    });
+</script>
